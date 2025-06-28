@@ -1,0 +1,1 @@
+from .shortcut_jittor import ShortcutModel

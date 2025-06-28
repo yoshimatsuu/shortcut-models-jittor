@@ -1,0 +1,48 @@
+# Root directory for outputs
+output_dir: ../output
+
+# Dataset directory
+dataset_dir: ../dataset
+
+# Checkpoint directory for resuming training
+ckpt_dir: null
+
+# Batch size
+batch_size: 128
+num_workers: 2
+max_step: 50000
+
+# Seed value used for rng initialization
+seed: 2
+
+# Automatic mixed precision
+# Choose from ‘no’,‘fp16’,‘bf16’ or ‘fp8’.
+amp: 'no' # 'fp16'
+
+# Max norm of gradient clipping
+max_grad_norm: 1.0
+
+# CFG
+cfg_dropout_prob: 0.1
+
+timestep_sampler:
+  rate_self_consistency: 0.25
+  min_dt: 0.0078125  # 1/128
+
+logger:
+  project_name: 'project_name'
+  run_name: 'run_name'
+
+logging:
+  # Step interval for logging metrics / saving checkpoints
+  # / generating samples / test (validation) / printing metrics
+  n_step_log: 100
+  n_step_ckpt: 2000
+  n_step_sample: 2000
+  n_step_test: 1000
+  n_step_print: 1000
+  # Number of generated samples
+  n_samples_per_step: 5
+  steps: [1, 4, 32]
+
+  metrics_for_best_ckpt: ['loss']

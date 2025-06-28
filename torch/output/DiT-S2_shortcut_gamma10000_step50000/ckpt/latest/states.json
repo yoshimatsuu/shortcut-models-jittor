@@ -1,0 +1,5 @@
+{
+  "global_step": 50001,
+  "best_metrics": Infinity,
+  "latest_metrics": Infinity
+}

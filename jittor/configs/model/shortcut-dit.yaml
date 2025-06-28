@@ -1,0 +1,16 @@
+
+_target_: shortcut_models.ShortcutModel
+
+num_label: 10  # MNIST
+patch_width: 2  # 4x4 patchification
+
+# DiT setting
+model_config:
+  input_size: 28
+  dim_in: 1
+  dim: 384
+  depth: 12
+  num_heads: 6
+  cond_token_dim: 64
+  use_shortcut: true
+  use_checkpoint: false

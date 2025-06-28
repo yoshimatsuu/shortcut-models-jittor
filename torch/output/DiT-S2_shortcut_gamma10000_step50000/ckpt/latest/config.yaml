@@ -1,0 +1,57 @@
+model:
+  _target_: shortcut_models.ShortcutModel
+  num_label: 10
+  patch_width: 2
+  model_config:
+    input_size: 28
+    dim_in: 1
+    dim: 384
+    depth: 12
+    num_heads: 6
+    cond_token_dim: 64
+    use_shortcut: true
+    use_checkpoint: false
+trainer:
+  output_dir: ../output
+  dataset_dir: ../dataset
+  ckpt_dir: null
+  batch_size: 128
+  num_workers: 2
+  seed: 2
+  amp: 'no'
+  max_grad_norm: 1.0
+  cfg_dropout_prob: 0.1
+  timestep_sampler:
+    rate_self_consistency: 0.25
+    min_dt: 0.0078125
+  logger:
+    project_name: project_name
+    run_name: run_name
+  logging:
+    n_step_log: 100
+    n_step_ckpt: 2000
+    n_step_sample: 2000
+    n_step_test: 1000
+    n_step_print: 1000
+    n_samples_per_step: 5
+    steps:
+    - 1
+    - 4
+    - 32
+    metrics_for_best_ckpt:
+    - loss
+optimizer:
+  optimizer:
+    _partial_: true
+    _target_: torch.optim.AdamW
+    betas:
+    - 0.8
+    - 0.99
+    lr: 0.0001
+    weight_decay: 0.001
+  scheduler:
+    _partial_: true
+    _target_: utils.scheduler.InverseLR
+    inv_gamma: 10000
+    power: 0.5
+    warmup: 0.999
